@@ -1,0 +1,18 @@
+调用流程
+MainFragment.onActivityCreated().setupUIElements().setupRowAdapter().createRows().createCardRow().setAdapter().setupEventListeners()--
+[以下循环调用]
+CardPresenterSelector.getPresenter()--
+new ImageCardViewPresenter().onCreateView().onBindViewHolder()
+[以下循环调用]
+
+
+CardExampleFragment.onActivityCreated().setupUi().setupRowAdapter()
+[以下循环调用 ,只是themeResId回改变,而这个改变就跟布局有关,imageCardView Example左边列表,在选中不同item时,也会回调getPresenter,而在imageCardView Example右边列表,其中一行左右移动时,不会回调getPresenter,但是上下移动就会回调getPresenter]
+CardPresenterSelector.getPresenter()--
+new ImageCardViewPresenter().onCreateView().onBindViewHolder()
+[以下循环调用]
+
+CardExampleFragment每次切换到不同的presenter时,就会回调CardPresenterSelector.getPresenter()--
+presenter 使用imageCardViewPresenter时,控件都是imageCardView,不同是presenter的theme,把style的id传进去
+
+

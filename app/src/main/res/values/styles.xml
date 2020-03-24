@@ -188,7 +188,7 @@
         <item name="lbImageCardViewType">Title</item>
     </style>
 
-    <!-- Theme corresponding to the SingleLineCardStyle -->
+    <!-- Theme corresponding to the SingleLineCardStyle [CardExampleFragment_ImageCardView Customize Style] -->
     <style name="SingleLineCardTheme" parent="Theme.Leanback">
         <item name="imageCardViewStyle">@style/SingleLineCardStyle</item>
         <item name="imageCardViewTitleStyle">@style/SingleLineCardTitleStyle</item>

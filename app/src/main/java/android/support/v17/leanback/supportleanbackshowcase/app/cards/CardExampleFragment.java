@@ -22,23 +22,22 @@ import android.support.v17.leanback.supportleanbackshowcase.R;
 import android.support.v17.leanback.supportleanbackshowcase.app.details.DetailViewExampleActivity;
 import android.support.v17.leanback.supportleanbackshowcase.app.details.DetailViewExampleFragment;
 import android.support.v17.leanback.supportleanbackshowcase.app.details.ShadowRowPresenterSelector;
+import android.support.v17.leanback.supportleanbackshowcase.app.room.controller.app.SampleApplication;
 import android.support.v17.leanback.supportleanbackshowcase.cards.presenters.CardPresenterSelector;
 import android.support.v17.leanback.supportleanbackshowcase.models.Card;
 import android.support.v17.leanback.supportleanbackshowcase.models.CardRow;
 import android.support.v17.leanback.supportleanbackshowcase.utils.CardListRow;
 import android.support.v17.leanback.supportleanbackshowcase.utils.Utils;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
+import android.support.v17.leanback.widget.DividerRow;
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ImageCardView;
-import android.support.v17.leanback.widget.DividerRow;
-import android.support.v17.leanback.widget.SectionRow;
-import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.PresenterSelector;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
-import android.support.v17.leanback.widget.SearchOrbView;
+import android.support.v17.leanback.widget.SectionRow;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -84,7 +83,11 @@ public class CardExampleFragment extends BrowseFragment {
                 Intent intent = new Intent(getActivity().getBaseContext(),
                         DetailViewExampleActivity.class);
                 Card card = (Card) item;
-                int imageResId = card.getLocalImageResourceId(getContext());
+                int imageResId = 0;
+                imageResId = card.getLocalImageResourceId(SampleApplication.getInstance());
+//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                    imageResId = card.getLocalImageResourceId(getContext());
+//                }
                 intent.putExtra(DetailViewExampleFragment.EXTRA_CARD, imageResId);
                 startActivity(intent, bundle);
             }
@@ -101,7 +104,7 @@ public class CardExampleFragment extends BrowseFragment {
             @Override
             public void run() {
                 createRows();
-                startEntranceTransition();
+                startEntranceTransition();//当fragment完成加载数据时，它应该调用startEntranceTransition（）来执行入口转换。
             }
         }, 500);
     }
@@ -111,7 +114,7 @@ public class CardExampleFragment extends BrowseFragment {
                 .inputStreamToString(getResources().openRawResource(R.raw.cards_example));
         CardRow[] rows = new Gson().fromJson(json, CardRow[].class);
         for (CardRow row : rows) {
-            mRowsAdapter.add(createCardRow(row));
+            mRowsAdapter.add(createCardRow(row));//左边栏的数据
         }
     }
 
@@ -125,11 +128,11 @@ public class CardExampleFragment extends BrowseFragment {
             default:
                 // Build main row using the ImageCardViewPresenter.
                 PresenterSelector presenterSelector = new CardPresenterSelector(getActivity());
-                ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenterSelector);
+                ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(presenterSelector);//presenter关联adapter
                 for (Card card : cardRow.getCards()) {
-                    listRowAdapter.add(card);
+                    listRowAdapter.add(card);//ImageCardView Examples右边列表数据
                 }
-                return new CardListRow(new HeaderItem(cardRow.getTitle()), listRowAdapter, cardRow);
+                return new CardListRow(new HeaderItem(cardRow.getTitle()), listRowAdapter, cardRow);//关联左右2边数据
         }
     }
 

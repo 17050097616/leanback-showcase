@@ -44,7 +44,7 @@ public class CardPresenterSelector extends PresenterSelector {
         Presenter presenter = presenters.get(card.getType());
         if (presenter == null) {
             switch (card.getType()) {
-                case SINGLE_LINE:
+                case SINGLE_LINE://CardExampleFragment ImageCardView Customize Style
                     presenter = new SingleLineCardPresenter(mContext);
                     break;
                 case VIDEO_GRID:
@@ -56,23 +56,23 @@ public class CardPresenterSelector extends PresenterSelector {
                 case SQUARE_BIG:
                 case GRID_SQUARE:
                 case GAME: {
-                    int themeResId = R.style.MovieCardSimpleTheme;
+                    int themeResId = R.style.MovieCardSimpleTheme;//CardExampleFragment card type==MOVIE
                     if (card.getType() == Card.Type.MOVIE_BASE) {
-                        themeResId = R.style.MovieCardBasicTheme;
+                        themeResId = R.style.MovieCardBasicTheme;//CardExampleFragment 第二行
                     } else if (card.getType() == Card.Type.MOVIE_COMPLETE) {
-                        themeResId = R.style.MovieCardCompleteTheme;
+                        themeResId = R.style.MovieCardCompleteTheme;//CardExampleFragment 第三行
                     } else if (card.getType() == Card.Type.SQUARE_BIG) {
-                        themeResId = R.style.SquareBigCardTheme;
-                    } else if (card.getType() == Card.Type.GRID_SQUARE) {
+                        themeResId = R.style.SquareBigCardTheme;//CardExampleFragment 第4行
+                    } else if (card.getType() == Card.Type.GRID_SQUARE) {//
                         themeResId = R.style.GridCardTheme;
-                    } else if (card.getType() == Card.Type.GAME) {
+                    } else if (card.getType() == Card.Type.GAME) {//CardExampleFragment title+mDescription+icon
                         themeResId = R.style.GameCardTheme;
                     }
                     presenter = new ImageCardViewPresenter(mContext, themeResId);
                     break;
                 }
                 case SIDE_INFO:
-                    presenter = new SideInfoCardPresenter(mContext);
+                    presenter = new SideInfoCardPresenter(mContext);//CardExampleFragment baseCardView info on the right// 选中左边第三行时
                     break;
                 case TEXT:
                     presenter = new TextCardPresenter(mContext);
@@ -81,10 +81,10 @@ public class CardPresenterSelector extends PresenterSelector {
                     presenter = new IconCardPresenter(mContext);
                     break;
                 case CHARACTER:
-                    presenter = new CharacterCardPresenter(mContext);
+                    presenter = new CharacterCardPresenter(mContext);//CardExampleFragment
                     break;
                 default:
-                    presenter = new ImageCardViewPresenter(mContext);
+                    presenter = new ImageCardViewPresenter(mContext);//首页的 CardExampleFragment 第6行
                     break;
             }
         }

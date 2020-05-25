@@ -75,7 +75,7 @@ public class CardPresenterSelector extends PresenterSelector {
                     presenter = new SideInfoCardPresenter(mContext);//CardExampleFragment baseCardView info on the right// 选中左边第三行时
                     break;
                 case TEXT:
-                    presenter = new TextCardPresenter(mContext);
+                    presenter = new TextCardPresenter(mContext);//右上角带五角星的
                     break;
                 case ICON:
                     presenter = new IconCardPresenter(mContext);
